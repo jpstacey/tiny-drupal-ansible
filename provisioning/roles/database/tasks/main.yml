@@ -1,0 +1,27 @@
+- name: Configure.
+  with_first_found:
+    - "../../../vars/drupal.yml"
+  include_vars: "{{ item }}"
+
+- name: 1. install MySQL Server
+  apt: name=mysql-server state=present
+
+- name: 2. install MySQL Client
+  apt: name=mysql-client state=present
+
+- name: 3. Start Mysql Service
+  service: name=mysql state=started enabled=true
+
+- name: 4. Install MySQL extension for PHP
+  apt: name=php5-mysql state=present
+
+- name: Ansible dependencies for MySQL management
+  apt: name=python-mysqldb state=present
+
+- name: Create database.
+  mysql_db: name={{ database.name }} state=present
+
+- name: Assign permissions.
+  mysql_user: >
+    name={{ database.user }} password={{ database.pass }}
+    priv={{ database.name }}.*:ALL,GRANT state=present

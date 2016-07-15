@@ -1,0 +1,23 @@
+- name: Configure.
+  with_first_found:
+    - "../../../vars/drupal.yml"
+  include_vars: "{{ item }}"
+
+- name: Install Apache
+  apt: name=apache2 state=present
+
+- name: Install PHP module for Apache
+  apt: name=libapache2-mod-php5 state=present
+
+- name: Add vhost.
+  template:
+    src: templates/apache_vhost.conf.j2
+    dest: /etc/apache2/sites-enabled/{{ codebase.short_name }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - '{{ codebase }}'
+
+- name: Restart Apache.
+  service: name=apache2 state=restarted enabled=yes

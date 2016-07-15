@@ -1,0 +1,8 @@
+database:
+  name: database_name
+  user: username_in_settings
+  pass: password_in_settings
+
+codebase:
+  domain: sitename.local
+  short_name: sitename 

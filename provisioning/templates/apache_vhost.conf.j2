@@ -1,0 +1,7 @@
+<VirtualHost *:80>
+    ServerName {{ item.domain }}
+    DocumentRoot /var/www/web
+
+    ErrorLog  /var/log/apache2/{{ item.short_name }}-error_log
+    CustomLog /var/log/apache2/{{ item.short_name }}-access_log common
+</VirtualHost>

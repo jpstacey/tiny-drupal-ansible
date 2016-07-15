@@ -1,0 +1,2 @@
+- name: Locale.
+  apt: name=language-pack-en state=present update_cache=yes
