@@ -3,11 +3,17 @@
     - "../../../vars/drupal.yml"
   include_vars: "{{ item }}"
 
-- name: Install Apache
+- name: Install Apache.
   apt: name=apache2 state=present
 
-- name: Install PHP module for Apache
+- name: Install PHP module for Apache.
   apt: name=libapache2-mod-php5 state=present
+
+- name: Install PHP GD graphics module.
+  apt: name=php5-gd state=present
+
+- name: Enable mod_rewrite.
+  command: a2enmod rewrite
 
 - name: Add vhost.
   template:

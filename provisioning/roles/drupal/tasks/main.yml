@@ -24,3 +24,8 @@
 
 - name: Ensure files in the files folder locked down to r-xr-xr--.
   command: find /var/www/web/sites/default/files -type f -exec chmod 0644 {} \;
+
+- name: Install composer.
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer

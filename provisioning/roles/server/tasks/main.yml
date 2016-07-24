@@ -1,2 +1,5 @@
-- name: Locale.
+- name: Install locale.
   apt: name=language-pack-en state=present update_cache=yes
+
+- name: Install PHP/cURL bridge.
+  apt: name=php5-curl state=present
