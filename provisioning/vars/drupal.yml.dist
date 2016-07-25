@@ -6,3 +6,5 @@ database:
 codebase:
   domain: hostname.local
   short_name: myshortname
+  folders:
+    files: /var/www/web/sites/default/files

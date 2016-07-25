@@ -1,6 +1,11 @@
 # @file
 # Drupal-related tasks: database dump etc.
 
+- name: Configure.
+  with_first_found:
+    - "../../../vars/drupal.yml"
+  include_vars: "{{ item }}"
+
 - name: Check if database dump exists.
   stat: path="/var/dumps/{{ database.name }}.sql.gz"
   register: dump
@@ -19,11 +24,11 @@
 
 - name: Ensure files folder contents owned by www-data.
   file: >
-    dest=/var/www/web/sites/default/files owner=www-data
+    dest={{ codebase.folders.files }} owner=www-data
     group=www-data mode=0775 recurse=yes
 
 - name: Ensure files in the files folder locked down to r-xr-xr--.
-  command: find /var/www/web/sites/default/files -type f -exec chmod 0644 {} \;
+  command: find "{{ codebase.folders.files }}" -type f -exec chmod 0644 {} \;
 
 - name: Install composer.
   shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
