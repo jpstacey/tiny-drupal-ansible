@@ -3,3 +3,6 @@
 
 - name: Install PHP/cURL bridge.
   apt: name=php5-curl state=present
+
+- name: Install git.
+  apt: name=git state=present

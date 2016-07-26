@@ -5,3 +5,4 @@
     - webserver
     - database
     - drupal
+    - drush

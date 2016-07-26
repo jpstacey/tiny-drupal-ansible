@@ -1,0 +1,16 @@
+- name: Clone Drush
+  git:
+    repo: https://github.com/drush-ops/drush.git
+    dest: /usr/local/share/drush
+
+- name: Install Drush dependencies with Composer.
+  shell: >
+    composer install --prefer-source --no-interaction
+    chdir=/usr/local/share/drush
+    creates=/usr/local/share/drush/vendor/autoload.php
+
+- name: Create drush symlink
+  file:
+    src: /usr/local/share/drush/drush
+    dest: /usr/bin/drush
+    state: link

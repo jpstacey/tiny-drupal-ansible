@@ -8,6 +8,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.33.10"
 
   config.vm.synced_folder ".", "/var/www", owner: 'www-data', group: 'www-data'
+  config.vm.synced_folder "dumps", "/var/dumps"
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
