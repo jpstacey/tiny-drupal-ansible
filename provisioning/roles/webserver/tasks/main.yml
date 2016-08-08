@@ -12,18 +12,27 @@
 - name: Install PHP GD graphics module.
   apt: name=php5-gd state=present
 
+- name: Disable default Apache website.
+  command: a2dissite 000-default.conf
+
+- name: Remove default Apache website.
+  file: path=/var/www/html state=absent
+
 - name: Enable mod_rewrite.
   command: a2enmod rewrite
 
-- name: Add vhost.
+- name: Add dedicated vhost.
   template:
     src: templates/apache_vhost.conf.j2
-    dest: /etc/apache2/sites-enabled/{{ codebase.short_name }}.conf
+    dest: /etc/apache2/sites-available/{{ codebase.short_name }}.conf
     owner: root
     group: root
     mode: 0644
   with_items:
     - '{{ codebase }}'
+
+- name: Enable dedicated vhost.
+  command: a2ensite {{ codebase.short_name }}.conf
 
 - name: Restart Apache.
   service: name=apache2 state=restarted enabled=yes
