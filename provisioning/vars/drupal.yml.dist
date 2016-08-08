@@ -4,6 +4,7 @@ database:
   pass: password_in_settings
 
 codebase:
+  drupal_version: 8
   domain: hostname.local
   short_name: myshortname
   folders:

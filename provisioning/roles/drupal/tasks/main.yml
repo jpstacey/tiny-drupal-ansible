@@ -30,6 +30,16 @@
 - name: Ensure files in the files folder locked down to r-xr-xr--.
   command: find "{{ codebase.folders.files }}" -type f -exec chmod 0644 {} \;
 
+- name: Add a local-settings.php file suitable for Drupal {{ codebase.drupal_version }}.x.
+  template:
+    src: templates/drupal-{{ codebase.drupal_version }}-local-settings.php.j2
+    dest: /var/www/web/sites/default/local-settings.php
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - '{{ database }}'
+
 - name: Install composer.
   shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   args:

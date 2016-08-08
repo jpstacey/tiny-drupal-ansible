@@ -1,3 +1,5 @@
+web/sites/files
+web/sites/default/local-settings.php
 .vagrant/
 provisioning/vars/*.yml
 dumps/*sql.gz*
