@@ -6,6 +6,11 @@
     - "../../../vars/drupal.yml"
   include_vars: "{{ item }}"
 
+- name: Install composer.
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer
+
 - name: Check if database dump exists.
   stat: path="/var/dumps/{{ database.name }}.sql.gz"
   register: dump
@@ -39,8 +44,3 @@
     mode: 0644
   with_items:
     - '{{ database }}'
-
-- name: Install composer.
-  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-  args:
-    creates: /usr/local/bin/composer
