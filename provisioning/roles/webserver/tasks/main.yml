@@ -7,10 +7,10 @@
   apt: name=apache2 state=present
 
 - name: Install PHP module for Apache.
-  apt: name=libapache2-mod-php5 state=present
+  apt: name=libapache2-mod-php5.6 state=present
 
 - name: Install PHP GD graphics module.
-  apt: name=php5-gd state=present
+  apt: name=php5.6-gd state=present
 
 - name: Disable default Apache website.
   command: a2dissite 000-default.conf
@@ -20,6 +20,9 @@
 
 - name: Enable mod_rewrite.
   command: a2enmod rewrite
+
+- name: Enable mod_php5.6.
+  command: a2enmod php5.6
 
 - name: Add dedicated vhost.
   template:

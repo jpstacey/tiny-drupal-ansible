@@ -1,8 +1,14 @@
-- name: Install locale.
+- name: Install locale before Ondrej's repository, to avoid UTF errors.
   apt: name=language-pack-en state=present update_cache=yes
 
+- name: Add PHP 5.6/7.x repository
+  apt_repository: repo='ppa:ondrej/php'
+
+- name: Update apt cache
+  apt: update_cache=yes
+
 - name: Install PHP/cURL bridge.
-  apt: name=php5-curl state=present
+  apt: name=php5.6-curl state=present
 
 - name: Install git.
   apt: name=git state=present

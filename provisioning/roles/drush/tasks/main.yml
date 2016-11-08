@@ -3,6 +3,9 @@
     repo: https://github.com/drush-ops/drush.git
     dest: /usr/local/share/drush
 
+- name: Ensure PHP ext-dom installed, for Drush/phpunit.
+  apt: name=php5.6-xml state=present
+
 - name: Install Drush dependencies with Composer.
   shell: >
     composer install --prefer-source --no-interaction

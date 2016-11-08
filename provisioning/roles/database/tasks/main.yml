@@ -13,7 +13,7 @@
   service: name=mysql state=started enabled=true
 
 - name: 4. Install MySQL extension for PHP
-  apt: name=php5-mysql state=present
+  apt: name=php5.6-mysql state=present
 
 - name: Ansible dependencies for MySQL management
   apt: name=python-mysqldb state=present
