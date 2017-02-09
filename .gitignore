@@ -1,6 +1,9 @@
-web/
-!web/sites/default
-web/sites/default/local-settings.php
+web/*.*
+web/core
+web/themes
+web/modules
+web/sites/default/settings.local.php
+web/sites/*/files
 .vagrant/
 provisioning/vars/*.yml
 dumps/*sql.gz*
