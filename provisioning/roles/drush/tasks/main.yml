@@ -6,6 +6,9 @@
 - name: Ensure PHP ext-dom installed, for Drush/phpunit.
   apt: name=php5.6-xml state=present
 
+- name: Ensure PHP ext-mbstring installed, for Drush/phpunit.
+  apt: name=php5.6-xml state=present
+
 - name: Install Drush dependencies with Composer.
   shell: >
     composer install --prefer-source --no-interaction
