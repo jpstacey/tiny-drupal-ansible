@@ -1,0 +1,14 @@
+- name: Configure.
+  with_first_found:
+    - "../../../vars/drupal.yml"
+  include_vars: "{{ item }}"
+
+- name: Install Drupal site.
+  shell: >
+    /var/www/vendor/bin/drush si -y \
+      {{ install.profile }} --account-mail="{{ install.account_mail }}" \
+      --account-name="{{ install.account_name }}" --account-pass="{{ install.account_pass }}" \
+      --site-name="{{ install.site_name }}" --site-mail="{{ install.site_mail }}" \
+      --db-url="mysql://{{ database.user }}:{{ database.pass }}@localhost/{{ database.name }}"
+    chdir=/var/www/web
+    creates=/var/www/web/sites/default/settings.php

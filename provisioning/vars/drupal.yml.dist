@@ -9,3 +9,11 @@ codebase:
   short_name: myshortname
   folders:
     files: /var/www/web/sites/default/files
+
+install:
+  profile: standard
+  account_mail: admin@example.com
+  account_name: admin
+  account_pass: admin
+  site_name: Test Site
+  site_mail: admin@example.com
